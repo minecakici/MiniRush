@@ -44,10 +44,10 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
   Future<void> _skorlariKaydetVeYukle() async {
     final prefs = await SharedPreferences.getInstance();
     
-    // Toplam süreyi hesapla
+  
     int currentTotal = widget.memoryTime + widget.cupTime + widget.holeTime + widget.penaltyTime;
 
-    // 1. Oyuncunun en iyi skorunu kaydet/güncelle
+  
     String currentKey = "score_${widget.playerName}";
     int? existingScore = prefs.getInt(currentKey);
     
@@ -55,7 +55,7 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
       await prefs.setInt(currentKey, currentTotal);
     }
 
-    // 2. Cihazda kayıtlı gerçek oyuncu skorlarını çek
+   
     Map<String, int> scoresMap = {};
     Set<String> keys = prefs.getKeys();
 
@@ -69,7 +69,7 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
       }
     }
 
-    // 3. Küçükten büyüğe (en hızlı süreye göre) sırala
+    
     List<ScoreItem> list = scoresMap.entries
         .map((e) => ScoreItem(e.key, e.value))
         .toList();
@@ -82,7 +82,7 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
     });
   }
 
-  // Saniyeyi "2dk 05sn" veya "45sn" formatına dönüştüren fonksiyon
+  
   String formatDuration(int totalSecs) {
     int minutes = totalSecs ~/ 60;
     int seconds = totalSecs % 60;
@@ -100,7 +100,7 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          // 1. ARKA PLAN GÖRSELİ
+         
           SizedBox.expand(
             child: Image.asset(
               "assets/images/game_bg_muted.png",
@@ -117,7 +117,7 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
             ),
           ),
 
-          // 2. ARKA PLAN BULANIKLAŞTIRMA VE HAFİF KARARTMA
+          
           Positioned.fill(
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
@@ -125,7 +125,7 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
             ),
           ),
 
-          // 3. EKRAN İÇERİĞİ
+          
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
@@ -133,7 +133,7 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                 children: [
                   const SizedBox(height: 10),
 
-                  // BAŞLIK (Ana ekrandaki parlak tarzda)
+                  
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
@@ -165,7 +165,7 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
 
                   const SizedBox(height: 22),
 
-                  // ANA MENÜDEKİ CANLI MOR GLASSKART
+                  
                   Expanded(
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(30),
@@ -198,7 +198,7 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              // SON TUR ÖZET KUTUSU
+                            
                               Container(
                                 width: double.infinity,
                                 padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
@@ -213,19 +213,25 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Row(
-                                      children: [
-                                        const Text("🎮 ", style: TextStyle(fontSize: 20)),
-                                        Text(
-                                          "Son Turun (${widget.playerName}):",
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
+                                    Expanded(
+                                      child: Row(
+                                        children: [
+                                          const Text("🎮 ", style: TextStyle(fontSize: 20)),
+                                          Flexible(
+                                            child: Text(
+                                              "Son Turun (${widget.playerName}):",
+                                              overflow: TextOverflow.ellipsis,
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
+                                    const SizedBox(width: 8),
                                     Text(
                                       formatDuration(currentTotal),
                                       style: const TextStyle(
@@ -242,7 +248,7 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                               const Divider(color: Colors.white30, height: 1),
                               const SizedBox(height: 16),
 
-                              // SIRA İSİM SÜRE LİSTESİ
+                              
                               Expanded(
                                 child: isLoading
                                     ? const Center(
@@ -290,7 +296,7 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                                 ),
                                                 child: Row(
                                                   children: [
-                                                    // DERECE
+                                                    
                                                     SizedBox(
                                                       width: 60,
                                                       child: Text(
@@ -303,7 +309,7 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                                       ),
                                                     ),
 
-                                                    // OYUNCU ADI
+                                                    
                                                     Expanded(
                                                       child: Text(
                                                         item.name,
@@ -317,7 +323,7 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
                                                       ),
                                                     ),
 
-                                                    // SÜRE (Örn: 2dk 03sn)
+                                                    
                                                     Text(
                                                       formatDuration(item.totalSeconds),
                                                       style: TextStyle(
@@ -343,10 +349,10 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
 
                   const SizedBox(height: 22),
 
-                  // AKSİYON BUTONLARI
+                  
                   Row(
                     children: [
-                      // TEKRAR OYNA
+                      
                       Expanded(
                         child: SizedBox(
                           height: 58,
@@ -391,7 +397,7 @@ class _ScoreboardScreenState extends State<ScoreboardScreen> {
 
                       const SizedBox(width: 14),
 
-                      // ANA MENÜYE DÖN
+                      
                       Expanded(
                         child: SizedBox(
                           height: 58,
