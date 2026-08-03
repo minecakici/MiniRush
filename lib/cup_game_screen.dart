@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:confetti/confetti.dart';
 import 'mole_game_screen.dart'; // 3. Oyun (Köstebek Avı) eklendi
 
-// ==========================================
-// DAHİLİ ZAMANLAYICI
-// ==========================================
+
 class InternalGameTimer extends ChangeNotifier {
   Timer? _timer;
   int _seconds = 0;
@@ -33,9 +31,6 @@ class InternalGameTimer extends ChangeNotifier {
   }
 }
 
-// ==========================================
-// KIRMIZI BARDAK WIDGET'I
-// ==========================================
 class RedCupWidget extends StatelessWidget {
   const RedCupWidget({super.key});
 
@@ -54,7 +49,7 @@ class RedCupPainter extends CustomPainter {
     final double w = size.width;
     final double h = size.height;
 
-    // Bardak Gövdesi (Ters Çevrilmiş Bardak)
+    
     final Path cupPath = Path();
     cupPath.moveTo(w * 0.15, 12);
     cupPath.lineTo(w * 0.85, 12);
@@ -62,7 +57,7 @@ class RedCupPainter extends CustomPainter {
     cupPath.lineTo(0, h - 8);
     cupPath.close();
 
-    // Kırmızı Renk Gradient
+    
     final Paint cupPaint = Paint()
       ..shader = const LinearGradient(
         colors: [
@@ -74,7 +69,7 @@ class RedCupPainter extends CustomPainter {
         end: Alignment.bottomRight,
       ).createShader(Rect.fromLTWH(0, 0, w, h));
 
-    // Gölge
+
     final Path shadowPath = Path();
     shadowPath.addOval(Rect.fromLTWH(-5, h - 6, w + 10, 12));
     canvas.drawPath(
@@ -84,10 +79,9 @@ class RedCupPainter extends CustomPainter {
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 5),
     );
 
-    // Gövdeyi Çiz
+   
     canvas.drawPath(cupPath, cupPaint);
 
-    // Beyaz Plastik Kenarlık (Ağız Çemberi)
     final RRect rimRRect = RRect.fromRectAndRadius(
       Rect.fromLTWH(-2, h - 12, w + 4, 12),
       const Radius.circular(6),
@@ -95,7 +89,7 @@ class RedCupPainter extends CustomPainter {
     final Paint rimPaint = Paint()..color = Colors.white;
     canvas.drawRRect(rimRRect, rimPaint);
 
-    // Gövde Çizgileri
+   
     final Paint linePaint = Paint()
       ..color = Colors.white.withOpacity(0.25)
       ..style = PaintingStyle.stroke
@@ -109,17 +103,15 @@ class RedCupPainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
 
-// ==========================================
-// BARDAK OYUNU EKRANI
-// ==========================================
+
 class CupGameScreen extends StatefulWidget {
   final int previousTotalSeconds;
-  final String playerName; // Oyuncu ismi eklendi
+  final String playerName; 
 
   const CupGameScreen({
     super.key,
     this.previousTotalSeconds = 0,
-    required this.playerName, // Zorunlu parametre yapıldı
+    required this.playerName, 
   });
 
   @override
@@ -136,16 +128,14 @@ class _CupGameScreenState extends State<CupGameScreen> {
   bool isGameOver = false;
   bool areCupsUp = true;
   
-  int remainingLives = 3; // Toplam 3 Deneme Hakkı
-
-  // Bardakların ekran pozisyon indeksleri (0: Sol, 1: Orta, 2: Sağ)
+  int remainingLives = 3; 
   List<int> cupPositions = [0, 1, 2];
 
   @override
   void initState() {
     super.initState();
     confettiController = ConfettiController(duration: const Duration(seconds: 2));
-    gameTimer.start(); // Süre arkada akmaya başlar
+    gameTimer.start(); 
     startNewRound();
   }
 
@@ -158,11 +148,11 @@ class _CupGameScreenState extends State<CupGameScreen> {
       winningCupIndex = Random().nextInt(3);
     });
 
-    // Topun yerini göstermek için bardaklar başlangıçta 1.2 sn havada kalır
+    
     Timer(const Duration(milliseconds: 1200), () {
       if (mounted) {
         setState(() {
-          areCupsUp = false; // Bardaklar aşağı iner
+          areCupsUp = false; 
         });
 
         Timer(const Duration(milliseconds: 400), () {
@@ -174,7 +164,7 @@ class _CupGameScreenState extends State<CupGameScreen> {
     });
   }
 
-  // Takip edilebilir ideal hızda karıştırma animasyonu
+  
   void shuffleCupsOptimalSpeed() async {
     setState(() {
       isShuffling = true;
@@ -213,7 +203,7 @@ class _CupGameScreenState extends State<CupGameScreen> {
     });
 
     if (cupIndex == winningCupIndex) {
-      // DOĞRU BİLİNDİ
+      
       gameTimer.stop();
       confettiController.play();
 
@@ -223,7 +213,7 @@ class _CupGameScreenState extends State<CupGameScreen> {
         }
       });
     } else {
-      // YANLIŞ BİLİNDİ -> Hak 1 Azaltılır
+      
       setState(() {
         remainingLives--;
       });
@@ -324,7 +314,7 @@ class _CupGameScreenState extends State<CupGameScreen> {
     );
   }
 
-  // 3 Hak Bittiğinde Kural Sayfasına Yönlendiren Pop-up
+ 
   void showGameOverToRulesDialog() {
     showDialog(
       context: context,
