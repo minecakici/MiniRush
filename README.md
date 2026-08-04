@@ -12,6 +12,18 @@ Mini Rush, tek bir uygulama içerisinde birden fazla mini oyunu bir araya getire
 
 ---
 
+## 🎥 Oyun Tanıtım Videosu
+
+▶️ [Mini Rush Demo Videosunu İzle](screenshots/mini_rush_demo.mp4)
+
+---
+
+## 📸 Ekran Görüntüleri
+
+(Buraya daha önce eklediğin ekran görüntüleri gelecek.)
+
+---
+
 ## 🎯 Mini Oyunlar
 
 - 🧠 Hafıza Kartı Oyunu
@@ -58,5 +70,5 @@ flutter run
 
 ## 👩‍💻 Geliştirici
 
-**Mine Çakıcı**
+**Mine Çakıcı**  
 Flutter Developer
