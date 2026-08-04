@@ -18,12 +18,6 @@ Mini Rush, tek bir uygulama içerisinde birden fazla mini oyunu bir araya getire
 
 ---
 
-## 📸 Ekran Görüntüleri
-
-(Buraya daha önce eklediğin ekran görüntüleri gelecek.)
-
----
-
 ## 🎯 Mini Oyunlar
 
 - 🧠 Hafıza Kartı Oyunu
