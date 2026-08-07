@@ -14,7 +14,7 @@ Mini Rush, tek bir uygulama içerisinde birden fazla mini oyunu bir araya getire
 
 ## 🎥 Oyun Tanıtım Videosu
 
-▶️ [Mini Rush Demo Videosunu İzle](screenshots/mini_rush_demo.mp4)
+▶️ [Mini Rush Demo Videosunu İzle](screenshots/mini_rush_demo-.mp4)
 
 ---
 
