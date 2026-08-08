@@ -12,12 +12,6 @@ Mini Rush, tek bir uygulama içerisinde birden fazla mini oyunu bir araya getire
 
 ---
 
-## 🎥 Oyun Tanıtım Videosu
-
-▶️ [Mini Rush Demo Videosunu İzle](screenshots/mini_rush_demo-.mp4)
-
----
-
 ## 🎯 Mini Oyunlar
 
 - 🧠 Hafıza Kartı Oyunu
@@ -43,22 +37,6 @@ Mini Rush, tek bir uygulama içerisinde birden fazla mini oyunu bir araya getire
 - Dart
 - Material Design
 - Visual Studio Code
-
----
-
-## 🚀 Kurulum
-
-Projeyi bilgisayarınıza klonladıktan sonra aşağıdaki komutları çalıştırabilirsiniz.
-
-```bash
-git clone https://github.com/minecakici/MiniRush.git
-
-cd MiniRush
-
-flutter pub get
-
-flutter run
-```
 
 ---
 
